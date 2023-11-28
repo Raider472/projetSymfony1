@@ -2,26 +2,105 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Accueil</title>
+        {% block titreHeader %}
+            <title>Accueil</title>
+        {% endblock %}
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     </head>
     <body>
-        <h1 class="titre">Site de vente de vêtement trop cool</h1>
-        <div>
-            <p>TExte random</p>
-            <a href= {{path("vetementAll")}}>TestVetement</a>
-            <a href= {{path("vetementSingle")}}>TestVetementParUnNom</a>
-            <a href= {{path("creationMarque")}}>Création d'une marque</a>
-            <a href= {{path("creationVetement")}}>Création d'un vetement</a>
-        </div>
-        <div>
-            <button type="button">Ajouter</button>
-            <button type="button">Supprimer</button>
-            <button type="button">Lister</button>
-        </div>
+        {% block titrePage %}
+            <h1 class="titre">Bienvenue sur notre site de vente de vêtements</h1>
+        {% endblock %}
+        <nav>
+            <ul>
+                <li><a href="{{ path('accueil') }}">Accueil</a></li>
+                <li><a href="{{ path('creationVetement') }}">Ajouter un vêtement</a></li>
+                <li><a href="{{ path('creationMarque') }}">Ajouter une marque</a></li>
+                <li><a href="{{ path('suppressionVetement') }}">Supprimer un vêtement</a></li>
+            </ul>
+        </nav>
+        {% block body %}
+            <div class="contenu">
+                {% for vetement in vetements %}
+                <div class="boite">
+                    <img src="{{vetement.lien}}" alt="{{vetement.nom}} {{vetement.marque.nom}}">
+                    <h2>{{vetement.nom}} - {{vetement.marque.nom}}</h2>
+                </div>
+                {% endfor %}
+            </div>
+        {% endblock %}
         <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f2f2f2; /* Couleur de fond gris clair */
+            }
+
             .titre {
                 text-align: center;
+                background-color: #888; /* Variante de gris pour le titre */
+                margin: 0;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            nav {
+                background-color: #3498db;
+                padding: 10px;
+                color: #fff;
+            }
+
+            nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+            }
+
+            nav li {
+                margin: 0 15px;
+            }
+
+            nav a {
+                text-decoration: none;
+                color: #fff;
+                font-weight: bold;
+                font-size: 16px;
+            }
+
+            .contenu {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                padding: 20px;
+                 margin-left: 10%; /* Marge de 20px à gauche */
+                margin-right: 10%; /* Marge de 20px à droite */
+            }
+
+            .boite {
+                width: 200px;
+                height: 200px;
+                background-color: #fff;
+                border-radius: 10px;
+                margin: 10px;
+                text-align: center;
+            }
+
+            .boite:hover {
+                transform: scale(1.1); /* Agrandit la boîte de 10% lors du survol */
+            }
+
+            .boite img {
+                width: 100px; /* Ajustez la taille de l'image selon vos besoins */
+                border-radius: 50%; /* Pour obtenir une image ronde, si nécessaire */
+                margin-top: 20px;
+            }
+
+            .boite h2 {
+                margin-top: 10px;
+                color: #333; /* Couleur du texte */
             }
         </style>
     </body>

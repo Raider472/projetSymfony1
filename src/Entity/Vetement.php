@@ -18,12 +18,16 @@ class Vetement
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $lien = null;
+
     #[ORM\ManyToMany(targetEntity: Taille::class, inversedBy: 'vetement')]
     private Collection $taille;
 
     #[ORM\ManyToOne(inversedBy: 'vetement')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Marque $marque = null;
+
 
     public function __construct()
     {
@@ -43,6 +47,18 @@ class Vetement
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(string $lien): static
+    {
+        $this->lien = $lien;
 
         return $this;
     }

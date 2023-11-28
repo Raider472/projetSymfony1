@@ -17,7 +17,7 @@
                 ->add('nom', TextType::class, [
                     'label' => 'Nom de la Marque',
                 ])
-                ->add('save', SubmitType::class, [
+                ->add('ajouter', SubmitType::class, [
                     'attr' => ['class' => 'save'],
                 ])
 

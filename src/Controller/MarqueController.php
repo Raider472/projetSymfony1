@@ -24,7 +24,7 @@
                 $em->flush();
          
                 $this->addFlash('success', 'Marque créé!');
-                return $this->redirectToRoute('acceuil');
+                return $this->redirectToRoute('accueil');
             }
 
             return $this->render('ajoutMarque.html.twig', [

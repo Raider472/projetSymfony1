@@ -15,7 +15,8 @@
                 "Gucci",
                 "China",
                 "Kipling",
-                "JSP"
+                "JSP",
+                "Arknights"
             ];
      
             foreach ($nomsMarque as $key => $nomMarque) {

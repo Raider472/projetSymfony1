@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Ajout d'un vetement</h1>
+{% extends "accueil.html.twig" %}
+{% block titreHeader %}
+    <title>Ajout d'un vêtement</title>
+{% endblock %}
+{% block titrePage %}
+    <h1 class="titre">Ajout d'un vetement</h1>
+{% endblock %}
+{% block body %}
     {{ form(formulaire) }}
-</body>
-</html>
+{% endblock %}

@@ -44,7 +44,28 @@ use Symfony\Component\HttpFoundation\Response;
                 $em->flush();
          
                 $this->addFlash('success', 'Vetement créé!');
-                return $this->redirectToRoute('acceuil');
+                return $this->redirectToRoute('accueil');
+            }
+
+            return $this->render('ajoutVetement.html.twig', [
+                'vetement' => $vetement,
+                'formulaire' => $form->createView()
+            ]);
+        }
+
+        #[Route('/vetementSuppression', name: 'suppressionVetement')]
+        public function suppressionVetement(Request $request, EntityManagerInterface $em): Response {
+            
+            $vetement = new Vetement();
+            $form = $this->createForm(VetementType::class, $vetement);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em->persist($vetement);
+                $em->flush();
+         
+                $this->addFlash('success', 'Vetement créé!');
+                return $this->redirectToRoute('accueil');
             }
 
             return $this->render('ajoutVetement.html.twig', [

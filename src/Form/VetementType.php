@@ -5,7 +5,8 @@
     use App\Entity\Marque;
     use App\Entity\Taille;
     use App\Entity\Vetement;
-    use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Widget;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\DateType;
     use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,6 +21,9 @@
                 ->add('nom', TextType::class, [
                     'label' => 'Nom du vetement',
                 ])
+                ->add("lien", TextType::class, [
+                    'label' => "lien de l'image",
+                ])
                 ->add('marque', EntityType::class, [
                     'class' => Marque::class,
                     'choice_label' => 'nom',
@@ -29,10 +33,10 @@
                     'class'=> Taille::class,
                     'choice_label' => 'nom',
                     'label' => 'taille du Vêtement',
-                    'multiple' => true,  // Permet de sélectionner plusieurs tailles
-                    'expanded' => true,  // Affiche les tailles sous forme de cases à cocher
+                    'multiple' => true,
+                    'expanded' => true,
                 ])
-                ->add('save', SubmitType::class, [
+                ->add('ajouter', SubmitType::class, [
                     'attr' => ['class' => 'save'],
                 ])
 
