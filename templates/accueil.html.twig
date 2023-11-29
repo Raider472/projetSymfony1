@@ -23,8 +23,10 @@
             <div class="contenu">
                 {% for vetement in vetements %}
                 <div class="boite">
-                    <img src="{{vetement.lien}}" alt="{{vetement.nom}} {{vetement.marque.nom}}">
-                    <h2>{{vetement.nom}} - {{vetement.marque.nom}}</h2>
+                    <a href={{ path("vetementInspection", {"id": vetement.id}) }}>
+                        <img src="{{vetement.lien}}" alt="{{vetement.nom}} {{vetement.marque.nom}}">
+                        <h2>{{vetement.nom}} - {{vetement.marque.nom}}</h2>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
@@ -79,6 +81,10 @@
                 margin-right: 10%; /* Marge de 20px à droite */
             }
 
+            .contenu a {
+                text-decoration: none;
+            }
+
             .boite {
                 width: 200px;
                 height: 200px;
@@ -101,6 +107,46 @@
             .boite h2 {
                 margin-top: 10px;
                 color: #333; /* Couleur du texte */
+            }
+
+            .formulaire-container {
+                max-width: 600px;
+                margin: auto;
+                padding: 20px;
+                margin-top: 40px;
+                border: 2px solid #3498db;
+                border-radius: 10px;
+            }
+
+            .formulaire-container label {
+                font-size: 18px;
+                padding-right: 10px;
+                padding-left: 5px;
+                margin-top: 10px;
+            }
+
+            .formulaire-container input,
+            .formulaire-container select {
+                margin-bottom: 10px;
+            }
+
+            .formulaire-container button {
+                background-color: #3498db;
+                color: #fff;
+                padding: 12px 20px;
+                font-size: 18px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                display: block;
+                margin: auto;
+                margin-top: 20px;
+                cursor: pointer;
+                transition: background-color 0.3s; /
+            }
+
+            .formulaire-container button:active {
+                background-color: #2c3e50; /* Nouvelle couleur lorsqu'il est cliqué */
             }
         </style>
     </body>

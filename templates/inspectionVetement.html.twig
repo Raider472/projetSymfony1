@@ -1,0 +1,71 @@
+{% extends "accueil.html.twig" %}
+{% block titreHeader %}
+    <title>{{ vetement.nom }} {{ vetement.marque.nom }}</title>
+{% endblock %}
+{% block titrePage %}
+    <h1 class="titre">Détail {{ vetement.nom }} {{ vetement.marque.nom }}</h1>
+{% endblock %}
+{% block body %}
+    <div class="center-container">
+        <div class="detail-container">
+            <img src="{{ vetement.lien }}" alt="{{ vetement.nom }} {{ vetement.marque.nom }}">
+            <div class="info-container">
+                <div class="labP">
+                    <label>Type de vetement:</label>
+                    <p>{{ vetement.nom }}</p>
+                </div>
+                <div class="labP">
+                    <label>Marque:</label>
+                    <p>{{ vetement.marque.nom }}</p>
+                </div>
+                <div>
+                    <label>Taille disponible:</label>
+                    {% for taille in vetement.taille %}
+                        <p>{{ taille.nom }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .detail-container {
+            display: flex;
+            align-items: center; /* Aligne verticalement au milieu */
+        }
+
+        .detail-container img {
+            max-width: 600px;
+            margin-right: 20px;
+        }
+
+        .info-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-container div {
+            margin-bottom: 20px;
+        }
+
+        .info-container label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .labP {
+            display: flex;
+            align-items: center; /* Aligne verticalement au milieu */
+        }
+
+        .labP p {
+            margin: 0;
+        }
+    </style>
+{% endblock %}

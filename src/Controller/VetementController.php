@@ -12,23 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
     
     class VetementController extends AbstractController {
-        #[Route('/vetement', name: 'vetementAll')]
-        public function vetementListAll(VetementRepository $vetementRepository): Response {
-            
-            $vetements = $vetementRepository->findAll();
 
-            return $this->render('vetementAll.html.twig', [
-                "vetements" =>  $vetements,
-            ]);
-        }
+        #[Route('/vetementInspection/{id}', name: 'vetementInspection')]
+        public function inspectionVetement(string $id, VetementRepository $vetementRepository): Response {
+            $vetement = $vetementRepository->findOneBy(["id" => $id]);
 
-        #[Route('/vetementSingle', name: 'vetementSingle')]
-        public function vetementById(VetementRepository $vetementRepository): Response {
-            
-            $vetements = $vetementRepository->findOneBy(["nom" => "Pull"]);
-
-            return $this->render('vetementSingle.html.twig', [
-                "vetement" =>  $vetements,
+            return $this->render('inspectionVetement.html.twig', [
+                "vetement" =>  $vetement,
             ]);
         }
 

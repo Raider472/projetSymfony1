@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Ajout d'une marque</h1>
-    {{ form(formulaire) }}
-</body>
-</html>
+{% extends "accueil.html.twig" %}
+{% block titreHeader %}
+    <title>Ajout d'une marque</title>
+{% endblock %}
+{% block titrePage %}
+    <h1 class="titre">Ajout d'une marque</h1>
+{% endblock %}
+{% block body %}
+    <div class="formulaire-container">
+        {{ form(formulaire) }}
+    </div>
+{% endblock %}
