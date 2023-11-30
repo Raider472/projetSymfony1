@@ -43,22 +43,32 @@ use Symfony\Component\HttpFoundation\Response;
             ]);
         }
 
-        #[Route('/vetementSuppression', name: 'suppressionVetement')]
-        public function suppressionVetement(Request $request, EntityManagerInterface $em): Response {
+        #[Route('/vetementSuppression/{id}', name: 'suppressionVetement')]
+        public function suppressionVetement(string $id, EntityManagerInterface $em, VetementRepository $vetementRepository): Response {
             
-            $vetement = new Vetement();
+            $vetement = $vetementRepository->findOneBy(["id" => $id]);
+
+            $em->remove($vetement);
+            $em->flush();
+
+            return $this->redirectToRoute('accueil');
+        }
+
+        #[Route('/vetementModification/{id}', name: 'modificationVetement')]
+        public function modificationVetement(string $id, EntityManagerInterface $em, VetementRepository $vetementRepository, Request $request): Response {
+            
+            $vetement = $vetementRepository->findOneBy(["id" => $id]);
             $form = $this->createForm(VetementType::class, $vetement);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em->persist($vetement);
                 $em->flush();
          
-                $this->addFlash('success', 'Vetement créé!');
+                $this->addFlash('success', 'Vetement modifié!');
                 return $this->redirectToRoute('accueil');
             }
 
-            return $this->render('ajoutVetement.html.twig', [
+            return $this->render('modificationVetement.html.twig', [
                 'vetement' => $vetement,
                 'formulaire' => $form->createView()
             ]);

@@ -26,6 +26,14 @@
                 </div>
             </div>
         </div>
+        <div class="additional-images">
+            <a href="{{ path("suppressionVetement", {"id": vetement.id}) }}">
+                <img src="{{ asset("images/suppression.svg") }}" alt="Supprimer">
+            </a>
+            <a href="{{ path("modificationVetement", {"id": vetement.id}) }}">
+                <img src="{{ asset("images/modification.png") }}" alt="Modifier">
+            </a>
+        </div>
     </div>
     <style>
         .center-container {
@@ -33,6 +41,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
         }
 
         .detail-container {
@@ -61,11 +70,25 @@
 
         .labP {
             display: flex;
-            align-items: center; /* Aligne verticalement au milieu */
+            align-items: center;
         }
 
         .labP p {
             margin: 0;
+        }
+
+        .additional-images {
+            display: flex;
+            margin-top: 20px;
+            margin-right: 170px;
+        }
+
+        .additional-images img {
+            max-width: 70px;
+            margin-right: 10px;
+            padding: 20px;
+            padding-left: 40px;
+            padding-right: 40px;
         }
     </style>
 {% endblock %}
