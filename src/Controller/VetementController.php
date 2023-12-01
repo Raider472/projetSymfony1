@@ -5,11 +5,13 @@
     use App\Entity\Vetement;
 use App\Form\Type\VetementType;
 use App\Repository\VetementRepository;
+use App\Service\AppService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
     
     class VetementController extends AbstractController {
 
@@ -23,15 +25,14 @@ use Symfony\Component\HttpFoundation\Response;
         }
 
         #[Route('/vetementAjout', name: 'creationVetement')]
-        public function ajoutVetement(Request $request, EntityManagerInterface $em): Response {
+        public function ajoutVetement(Request $request, AppService $appService): Response {
             
             $vetement = new Vetement();
             $form = $this->createForm(VetementType::class, $vetement);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em->persist($vetement);
-                $em->flush();
+                $appService->save($vetement);
          
                 $this->addFlash('success', 'Vetement créé!');
                 return $this->redirectToRoute('accueil');
@@ -55,14 +56,14 @@ use Symfony\Component\HttpFoundation\Response;
         }
 
         #[Route('/vetementModification/{id}', name: 'modificationVetement')]
-        public function modificationVetement(string $id, EntityManagerInterface $em, VetementRepository $vetementRepository, Request $request): Response {
+        public function modificationVetement(string $id, EntityManagerInterface $em, VetementRepository $vetementRepository, Request $request, AppService $appService): Response {
             
             $vetement = $vetementRepository->findOneBy(["id" => $id]);
             $form = $this->createForm(VetementType::class, $vetement);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em->flush();
+                $appService->save($vetement);
          
                 $this->addFlash('success', 'Vetement modifié!');
                 return $this->redirectToRoute('accueil');

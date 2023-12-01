@@ -5,6 +5,7 @@
     use Doctrine\ORM\EntityManagerInterface;
     use App\Entity\Marque; 
     use App\Form\Type\MarqueType; 
+    use App\Service\AppService;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
@@ -13,15 +14,14 @@
     class MarqueController extends AbstractController {
 
         #[Route('/ajoutDeMarque', name: 'creationMarque', methods: ['GET', 'POST'])]
-        public function ajoutMarque(Request $request, EntityManagerInterface $em): Response {
+        public function ajoutMarque(Request $request, AppService $appService): Response {
 
             $marque = new Marque();
             $form = $this->createForm(MarqueType::class, $marque);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em->persist($marque);
-                $em->flush();
+                $appService->save($marque);
          
                 $this->addFlash('success', 'Marque créé!');
                 return $this->redirectToRoute('accueil');
