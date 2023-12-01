@@ -11,8 +11,12 @@
             <img src="{{ vetement.lien }}" alt="{{ vetement.nom }} {{ vetement.marque.nom }}">
             <div class="info-container">
                 <div class="labP">
-                    <label>Type de vetement:</label>
+                    <label>Nom de vetement:</label>
                     <p>{{ vetement.nom }}</p>
+                </div>
+                <div class="labP">
+                    <label>Catégorie de vetement:</label>
+                    <p>{{ vetement.categorie.nom }}</p>
                 </div>
                 <div class="labP">
                     <label>Marque:</label>

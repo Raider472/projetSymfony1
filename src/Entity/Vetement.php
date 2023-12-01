@@ -18,6 +18,10 @@ class Vetement
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[ORM\ManyToOne(inversedBy: 'vetement')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categorie $categorie = null;
+
     #[ORM\Column(length: 255)]
     private ?string $lien = null;
 
@@ -47,6 +51,18 @@ class Vetement
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

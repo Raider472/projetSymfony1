@@ -2,7 +2,8 @@
 
     namespace App\Form\Type;
 
-    use App\Entity\Marque;
+use App\Entity\Categorie;
+use App\Entity\Marque;
     use App\Entity\Taille;
     use App\Entity\Vetement;
 use App\Entity\Widget;
@@ -20,6 +21,11 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
             $builder
                 ->add('nom', TextType::class, [
                     'label' => 'Nom du vetement',
+                ])
+                ->add('categorie', EntityType::class, [
+                    'class' => Categorie::class,
+                    'choice_label' => 'nom',
+                    'label' => 'Catégorie du Vêtement',
                 ])
                 ->add("lien", TextType::class, [
                     'label' => "lien de l'image",

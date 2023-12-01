@@ -11,10 +11,10 @@
         
         public function load(ObjectManager $manager) {
             $nomsVetement = [
-                "Shirt",
-                "Pull",
-                "Chausure",
-                "Pantalon",
+                "Shirt Noir",
+                "Pull CCP",
+                "Chausure Brun",
+                "Pantalon Cool",
                 "lappDumb"
             ];
 
@@ -31,6 +31,7 @@
             foreach ($nomsVetement as $key => $nomVetement) {
                 $vetement = new Vetement();
                 $vetement->setNom($nomVetement);
+                $vetement->setCategorie($this->getReference(CategorieFixtures::CATEGORIE_REFERENCE . "_" . $numéro));
                 $vetement->setLien($liens[$numéro]);
                 $vetement->addTaille($this->getReference(TailleFixtures::TAILLE_REFERENCE . "_" . $numéro));
                 $vetement->setMarque($this->getReference(MarqueFixtures::MARQUE_REFERENCE . "_" . $numéro));
